@@ -18,3 +18,4 @@ trial,24.0
 trial,24.0
 retyr,36.0
 george,36.0
+Jonathan,72.0

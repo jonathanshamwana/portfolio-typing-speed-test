@@ -91,7 +91,7 @@ class TypingTest:
         for line in data:
             if line != "":
                 combo = line.split(",")
-                score_dict[combo[0]] = float(combo[1])
+                score_dict[combo[0].title()] = float(combo[1])
 
         sorted_dict = sorted(score_dict.items(), key=lambda x: x[1], reverse=True)
         for key, value in sorted_dict[:3]:
