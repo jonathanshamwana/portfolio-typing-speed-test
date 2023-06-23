@@ -12,7 +12,7 @@ class TypingTest:
         self.window.resizable(width=False, height=False)
         self.time_counter = 0
         self.running = False
-        self.cpm = 0
+        self.word_count = 0
         self.wpm = 0
         self.percentile = None
         self.name = None
@@ -63,6 +63,7 @@ class TypingTest:
         if not self.copy_label.cget("text").startswith(self.entry.get()):
             self.entry.config(fg="red")
         elif self.copy_label.cget("text") == self.entry.get():
+            self.word_count += len(self.entry.get().split(" "))
             self.entry.config(fg="green")
             self.copy_label.config(text=random.choice(self.texts))
             self.entry.delete(0, END)
@@ -71,14 +72,11 @@ class TypingTest:
 
     def timer(self):
         if self.time_counter == 30:
+            self.word_count += len(self.entry.get().split(" "))
             self.running = False
             self.show_results()
         else:
             self.time_counter += 1
-            cps = len(self.entry.get()) / self.time_counter
-            self.cpm = cps * 60
-            wps = len(self.entry.get().split(" ")) / self.time_counter
-            self.wpm = wps * 60
             self.window.after(1000, self.timer)
 
     def update_scoreboard(self):
@@ -114,6 +112,9 @@ class TypingTest:
             self.percentile = "99th"
 
     def show_results(self):
+        wps = self.word_count / self.time_counter
+        self.wpm = wps * 60
+
         self.update_scoreboard()
         self.calculate_percentile()
 

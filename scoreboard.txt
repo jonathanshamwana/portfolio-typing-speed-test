@@ -19,3 +19,6 @@ trial,24.0
 retyr,36.0
 george,36.0
 Jonathan,72.0
+benjamin,12.0
+morwenna,352.0
+clive,44.0
